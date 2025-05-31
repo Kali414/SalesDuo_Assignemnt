@@ -42,10 +42,10 @@ Meeting Transcript:
         response = model.generate_content(prompt)
         text_response = response.text.strip()
 
-        # ✅ Strip Markdown code block if exists
+        # Strip Markdown code block if exists
         cleaned_text = re.sub(r"^```json|```$", "", text_response.strip(), flags=re.MULTILINE).strip()
 
-        # ✅ Parse as JSON directly
+        # Parse as JSON directly
         parsed = json.loads(cleaned_text)
 
         return jsonify(parsed), 200
