@@ -67,7 +67,7 @@ python app.py
 
 ## 6. API Usage with Postman Endpoint
 ```bash
-POST http://localhost:5000/process_meeting
+POST http://127.0.0.1:5000/process_meeting
 ```
 
 
@@ -127,7 +127,7 @@ In Postman:
 Test if the server is running by visiting:
 
 ``` arduino
-http://localhost:5000/
+http://127.0.0.1:5000/
 ```
 
 You should see:
