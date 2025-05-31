@@ -66,12 +66,12 @@ http://localhost:5000/
 
 
 
-### API Usage Endpoint
+### 5. API Usage Endpoint
 ```
 POST http://localhost:5000/process_meeting
 ```
 
-##  Supported Input Formats
+##  6. Supported Input Formats
 ### 1. Raw Text
 In Postman:
 - Body → raw → Text
@@ -113,7 +113,7 @@ In Postman:
 }
 ```
 
-## Health Check
+## 7. Health Check
 Visit:
 ```
 http://localhost:5000/
@@ -124,7 +124,7 @@ http://localhost:5000/
 <h1>Gemini Meeting Summarizer is Running</h1>
 ```
 
-##  File Structure
+## 8. File Structure
 ```
 ├── index.js             # Main Express server
 ├── .env                 # Your Gemini API key
