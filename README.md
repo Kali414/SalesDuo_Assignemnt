@@ -87,6 +87,8 @@ example1.txt — Sample meeting transcript with clear responsibilities
 
 example2.txt — A longer, real-world style meeting log
 
+data_json.txt - Use the content of the file , if the transcript data is already structured in JSON format.
+
 You can use these files to test the API by uploading via Postman or passing the text as input.
 
 
