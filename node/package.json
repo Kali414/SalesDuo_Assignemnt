@@ -1,0 +1,19 @@
+{
+  "name": "salesduo_assignemnt",
+  "version": "1.0.0",
+  "description": "This repository contains two separate implementations of a Meeting Summarizer API that extracts structured insights from meeting transcripts using Google Gemini API.\r - 🐍 Python (Flask)\r - 🟢 Node.js (Express)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "body-parser": "^2.2.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "multer": "^2.0.0"
+  }
+}
