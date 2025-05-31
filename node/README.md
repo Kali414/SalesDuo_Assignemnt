@@ -40,7 +40,7 @@ npm install
 ### 3. Create .env File
 In the root directory, create a .env file:
 ```
-GOOGLE_API_KEY=your_google_gemini_api_key   # your_google_gemini_api_key_key in string format
+GOOGLE_API_KEY=your_google_gemini_api_key   # your_google_gemini_api_key in string format
 ```
 ⚠️ Your key should start with AIza...
 

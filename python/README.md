@@ -33,7 +33,7 @@ cd python
 ## 2. Create and Configure .env File
 Create a .env file in the root directory and add your Google Gemini API Key:
 ```
-GOOGLE_API_KEY=your_google_gemini_api_key      # your_google_gemini_api_key_key in string format
+GOOGLE_API_KEY=your_google_gemini_api_key      # your_google_gemini_api_key in string format
 ```
 
 ### Get Your Gemini API Key
