@@ -1,4 +1,4 @@
-# 📝 Gemini Meeting Summarizer API (Node.js + Express)
+# Gemini Meeting Summarizer API (Node.js + Express)
 
 An API powered by **Google Gemini (1.5 Flash)** built with **Node.js and Express**. It summarizes meeting transcripts and extracts:
 
@@ -8,7 +8,7 @@ An API powered by **Google Gemini (1.5 Flash)** built with **Node.js and Express
 
 ---
 
-## 🚀 Features
+##  Features
 
 - Accepts input via:
   - Raw text
@@ -20,65 +20,72 @@ An API powered by **Google Gemini (1.5 Flash)** built with **Node.js and Express
 
 ---
 
-## 🔧 Setup Instructions
+##  Setup Instructions
 
 ### 1. Clone the Repository
 
-```bash
-git clone https://github.com/yourusername/gemini-meeting-summarizer-node.git
-cd gemini-meeting-summarizer-node
+```
+git clone https:https://github.com/Kali414/SalesDuo_Assignemnt.git
+cd SalesDuo_Assignemnt
+cd node
+```
 
+---
 
-2. Install Dependencies
-```bash
+### 2. Install Dependencies
+```
 npm install
+```
 
-3. Create .env File
+### 3. Create .env File
 In the root directory, create a .env file:
-
-``` ini
+```
 GOOGLE_API_KEY=your_google_gemini_api_key
+```
 ⚠️ Your key should start with AIza...
 
-4. Start the Server
-```bash
+### 4. Start the Server
+
+```
 node index.js
+```
 
 Server runs at:
-
-```arduino
+```
 http://localhost:5000/
+```
 
-🧪 API Usage
-🔗 Endpoint
-```bash
+
+
+### API Usage Endpoint
+```
 POST http://localhost:5000/process_meeting
+```
 
-✅ Supported Input Formats
-1. Raw Text
+##  Supported Input Formats
+### 1. Raw Text
 In Postman:
-Body → raw → Text
-Paste your meeting content
+- Body → raw → Text
+-Paste your meeting content
 
 Example:
-
-```pgsql
 The team finalized the launch timeline. Sarah will create the launch assets by July 5.
 
-2. JSON Input
+### 2. JSON Input
 In Postman:
-Body → raw → JSON
+-Body → raw → JSON
 
 Example:
-
 ```json
 {
   "text": "Kickoff call - June 3\nNext review on June 10\nRiya to send slides by June 8"
 }
-3. File Upload (.txt)
+```
+
+### 3. File Upload (.txt)
 In Postman:
-Body → form-data
-Key: file, Type: File, choose a .txt file
+- Body → form-data
+- Key: file, Type: File, choose a .txt file
 
 ✅ Sample Output
 ```json
@@ -95,19 +102,23 @@ Key: file, Type: File, choose a .txt file
     }
   ]
 }
-🔍 Health Check
+```
+
+## Health Check
 Visit:
-
-```arduino
+```
 http://localhost:5000/
+```
 
-Response:
-
-```html
+### Response:
+```
 <h1>Gemini Meeting Summarizer is Running</h1>
-📁 File Structure
-``` bash
+```
+
+##  File Structure
+```
 ├── index.js             # Main Express server
 ├── .env                 # Your Gemini API key
 ├── package.json         # Node project config
 └── README.md            # Project documentation
+```
