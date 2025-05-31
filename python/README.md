@@ -55,13 +55,13 @@ python app.py
 
 ---
 
-## API Usage with Postman Endpoint
+## 6. API Usage with Postman Endpoint
 ```bash
 POST http://localhost:5000/process_meeting
 ```
 
 
-## Supported Input Formats
+## 7. Supported Input Formats
 ### 1. Raw Text (Text Body)
 In Postman:
 - Go to Body → select raw
@@ -113,7 +113,7 @@ In Postman:
 ```
 
 ---
-## Health Check
+## 8. Health Check
 Test if the server is running by visiting:
 
 ``` arduino
@@ -127,7 +127,7 @@ You should see:
 
 ---
 
-## File Structure
+## 9. File Structure
 ```
 ├── app.py               # Main Flask application
 ├── .env                 # Environment file for Gemini API key
