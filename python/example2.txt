@@ -1,0 +1,9 @@
+Engineering Sync – July 10
+
+- Sprint 21 officially kicked off today.
+- Backend team to finalize the database schema changes by July 14.
+- Frontend team will implement the new dashboard widgets by July 18.
+- A critical bug in the authentication flow needs to be patched urgently.
+- Akshay suggested migrating to PostgreSQL for better scalability; decision deferred.
+- Infrastructure team will finish the CI/CD pipeline upgrades by July 20.
+- Discussion on adopting GitHub Copilot for faster code reviews—trial will begin next week.
