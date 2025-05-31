@@ -5,9 +5,6 @@ import google.generativeai as genai
 import json
 import re
 
-        
-from collections import OrderedDict
-
 # Load environment variables
 load_dotenv()
 api_key = os.getenv("GOOGLE_API_KEY")
