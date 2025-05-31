@@ -44,6 +44,15 @@ GOOGLE_API_KEY=your_google_gemini_api_key
 ```
 ⚠️ Your key should start with AIza...
 
+### Get Your Gemini API Key
+
+To use this application, you’ll need a **Google Gemini API key**. Here’s how to get one:
+
+1. Visit: [https://makersuite.google.com/app/apikey](https://makersuite.google.com/app/apikey)
+2. Sign in with your Google account.
+3. Click on "Create API key" and copy it.
+4. Paste the key into a `.env` file.
+
 ### 4. Start the Server
 
 ```
