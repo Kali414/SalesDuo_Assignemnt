@@ -65,20 +65,20 @@ def process_meeting():
             return jsonify({"error": "Meeting text is empty. Provide input as raw text, JSON, or .txt file."}), 400
 
         # Run model
-        raw_output = model.invoke({"meeting_text": meeting_text})
+        response = model.invoke({"meeting_text": meeting_text})
 
         # Attempt to parse as JSON if needed
         try:
-            parsed_output = json.loads(raw_output)
+            parsed_output = json.loads(response)
         except json.JSONDecodeError:
             # Clean Markdown code block if present
-            cleaned = re.sub(r"^```json|```$", "", raw_output.strip(), flags=re.MULTILINE).strip()
+            cleaned = re.sub(r"^```json|```$", "", response.strip(), flags=re.MULTILINE).strip()
             parsed_output = json.loads(cleaned)
 
         return jsonify(parsed_output), 200
 
     except json.JSONDecodeError as e:
-        return jsonify({"error": "Failed to parse JSON response.", "raw": raw_output}), 500
+        return jsonify({"error": "Failed to parse JSON response.", "raw": response}), 500
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
