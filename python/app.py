@@ -1,33 +1,30 @@
 from flask import Flask, jsonify, request
 import os
 from dotenv import load_dotenv
-import google.generativeai as genai
-import json
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain.prompts import PromptTemplate
+from langchain_core.output_parsers import StrOutputParser,JsonOutputParser
 import re
+import json
 
 # Load environment variables
 load_dotenv()
 api_key = os.getenv("GOOGLE_API_KEY")
 
-# Check API key
 if not api_key or not api_key.startswith("AIza"):
     raise ValueError("GOOGLE_API_KEY not found or invalid.")
 
-# Configure Gemini API
-genai.configure(api_key=api_key)
-model = genai.GenerativeModel("gemini-1.5-flash")
+# Initialize LangChain model 
+llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=api_key)
 
-# Initialize Flask app
-app = Flask(__name__)
-
-def extract_meeting_minutes(meeting_text):
-    prompt = f"""
+# Prompt Template
+prompt_template = PromptTemplate.from_template("""
 Extract the following from this meeting transcript:
 1. A 2–3 sentence summary.
 2. A list of key decisions.
 3. A structured list of action items with task, owner (if available), and deadline (if available).
 
-Return only valid JSON like :
+Return only valid JSON in the following format:
 {{
   "summary": "...",
   "decisions": ["..."],
@@ -36,50 +33,54 @@ Return only valid JSON like :
 
 Meeting Transcript:
 {meeting_text}
-"""
+""")
 
-    try:
-        response = model.generate_content(prompt)
-        text_response = response.text.strip()
+# Output parser
+output_parser = JsonOutputParser()
 
-        # Strip Markdown code block if exists
-        cleaned_text = re.sub(r"^```json|```$", "", text_response.strip(), flags=re.MULTILINE).strip()
+# LangChain Expression Chain
+model= prompt_template | llm | StrOutputParser()
 
-        # Parse as JSON directly
-        parsed = json.loads(cleaned_text)
+# Flask App
+app = Flask(__name__)
 
-        return jsonify(parsed), 200
-
-    except json.JSONDecodeError:
-        return jsonify({"error": "Failed to parse response as JSON", "raw": text_response}), 500
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-# Route to test if app is running
 @app.route("/")
 def home():
     return "<h1>Gemini Meeting Summarizer is Running</h1>"
 
-# Endpoint to process meeting input
 @app.route("/process_meeting", methods=["POST"])
 def process_meeting():
-    meeting_text = None
+    try:
+        # Getting input
+        if request.content_type == "application/json":
+            data = request.get_json()
+            meeting_text = data.get("text")
+        elif 'file' in request.files:
+            file = request.files["file"]
+            meeting_text = file.read().decode("utf-8")
+        else:
+            meeting_text = request.get_data(as_text=True)
 
-    if request.content_type == "application/json":
-        data = request.get_json()
-        meeting_text = data.get("text")
-        
-    elif 'file' in request.files:
-        file = request.files["file"]
-        meeting_text = file.read().decode("utf-8")
-    else:
-        meeting_text = request.get_data(as_text=True)
+        if not meeting_text:
+            return jsonify({"error": "Meeting text is empty. Provide input as raw text, JSON, or .txt file."}), 400
 
-    if not meeting_text:
-        return jsonify({"error": "Meeting text is empty.Provide input either as Raw text,JSON text or a .txt file upload."}), 400
+        # Run model
+        raw_output = model.invoke({"meeting_text": meeting_text})
 
-    return extract_meeting_minutes(meeting_text)
+        # Attempt to parse as JSON if needed
+        try:
+            parsed_output = json.loads(raw_output)
+        except json.JSONDecodeError:
+            # Clean Markdown code block if present
+            cleaned = re.sub(r"^```json|```$", "", raw_output.strip(), flags=re.MULTILINE).strip()
+            parsed_output = json.loads(cleaned)
 
-# Run the Flask app
+        return jsonify(parsed_output), 200
+
+    except json.JSONDecodeError as e:
+        return jsonify({"error": "Failed to parse JSON response.", "raw": raw_output}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 if __name__ == "__main__":
     app.run(debug=True)

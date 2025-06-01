@@ -1,6 +1,6 @@
 #  Gemini Meeting Summarizer API
 
-A Flask-based API powered by Google Gemini (1.5 Flash) that extracts meaningful insights from meeting transcripts and returns:
+A Flask-based API powered by Google Gemini (1.5 Flash) and LangChain that extracts meaningful insights from meeting transcripts and returns:
 
 - ✅ A concise summary
 - ✅ Key decisions
@@ -10,6 +10,7 @@ A Flask-based API powered by Google Gemini (1.5 Flash) that extracts meaningful 
 
 ##  Features
 
+- Uses LangChain to structure and streamline LLM prompts and parsing
 - Accepts input in multiple formats:
   - Raw text
   - JSON body
