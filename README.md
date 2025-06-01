@@ -14,7 +14,7 @@ Both versions leverage **Google Gemini 1.5 Flash** to extract structured insight
 
 ## 📂 Project Structure
 
-- /python → Python Flask implementation
+- /python → Python Flask Langchain implementation
 - /node → Node.js Express implementation
 - /data → Sample input transcript files
 
