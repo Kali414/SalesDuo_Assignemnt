@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import PromptTemplate
-from langchain_core.output_parsers import StrOutputParser,JsonOutputParser
+from langchain_core.output_parsers import StrOutputParser
 import re
 import json
 
@@ -36,10 +36,10 @@ Meeting Transcript:
 """)
 
 # Output parser
-output_parser = JsonOutputParser()
+output_parser = StrOutputParser()
 
 # LangChain Expression Chain
-model= prompt_template | llm | StrOutputParser()
+model= prompt_template | llm | output_parser
 
 # Flask App
 app = Flask(__name__)
